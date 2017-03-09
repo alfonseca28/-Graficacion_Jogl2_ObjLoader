@@ -101,12 +101,12 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
 
         // Cargar los objetos dentro del contexto de OpenGL
         try {
-            obj1 = or.Load("./data/bulldog.obj");
+            obj1 = or.Load("./data/IronMan.obj");
             System.out.println("Objeto 1 cargado :" + this.fileName);
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
-        
+        /*
         try {
             obj2 = or.Load("./data/chair55.obj");
             System.out.println("Objeto 2 cargado :" + this.fileName);
@@ -119,7 +119,8 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
             System.out.println("Objeto 3 cargado :" + this.fileName);
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
-        }        
+        }       
+        */
                 
         
     }
