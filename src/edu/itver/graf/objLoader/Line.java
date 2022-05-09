@@ -8,7 +8,6 @@ package edu.itver.graf.objLoader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 /**
  *
  * @author gmendez
@@ -18,29 +17,28 @@ public class Line {
     public ArrayList<Corner> corners;
     Object3d parent;
     Material mtl;
-    String   groupName="";
+    String groupName = "";
 
-    public Line(String[] aCorners, String material,String groupname, Object3d parent) {
+    public Line(String[] aCorners, String material, String groupname, Object3d parent) {
         corners = new ArrayList<Corner>();
 
         int len = aCorners.length;
         for (int i = 1; i < len; i++) {
             corners.add(new Corner(aCorners[i], parent));
         }
-        
-        if (parent.mtls.containsKey(material)){
-            mtl= (Material)parent.mtls.get(material);
+
+        if (parent.mtls.containsKey(material)) {
+            mtl = (Material) parent.mtls.get(material);
         }
-        
+
         this.groupName = groupname;
-                
+
     }
 
-    public void setGroupName(String groupname){
+    public void setGroupName(String groupname) {
         this.groupName = groupname;
     }
-    
-    
+
     public ArrayList<Corner> getCorners() {
         return corners;
     }
@@ -51,7 +49,7 @@ public class Line {
         Iterator itr = corners.iterator();
         while (itr.hasNext()) {
             Corner cr = (Corner) itr.next();
-            
+
             info = info + "\n Corner: " + cr.strCorner;
             info = info + "\n Vertice: x=" + cr.vert.x + ", y=" + cr.vert.y + ", z=" + cr.vert.z;
             if (cr.txtr != null) {

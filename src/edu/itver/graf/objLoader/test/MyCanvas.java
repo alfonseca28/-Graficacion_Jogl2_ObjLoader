@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+ /*
 http://www.sweethome3d.com/freeModels.jsp
 http://www.turbosquid.com/Search/3D-Models/free/obj
-*/
-
+ */
 package edu.itver.graf.objLoader.test;
 
 import com.jogamp.opengl.*;
@@ -32,7 +31,7 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
 
     private static final int CANVAS_WIDTH = 640;  // width of the drawable
     private static final int CANVAS_HEIGHT = 480; // height of the drawable
-    public static final int FPS = 10; // animator's target frames per second
+    public static final int FPS = 60; // animator's target frames per second
 
     int width = CANVAS_WIDTH;
     int height = CANVAS_HEIGHT;
@@ -40,12 +39,12 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
     GLU glu;  // for the GL Utility
     GLUT glut;
     Object3d obj1, obj2;
-    
+
     float rotate = 0.0f;
     float scale = 1.0f;
-    
+
     String fileName = "";
-    
+
     //  Posición de la fuente de luz 1
     float plx = 0.0f;
     float ply = 0.0f;
@@ -54,22 +53,21 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
     //  Posición de la cámara
     float pcx = 0.0f;
     float pcy = 2.0f;
-    float pcz = 10.0f;    
+    float pcz = 10.0f;
 
     //  Dirección de la camara
     float pvx = 0.0f;
     float pvy = 0.0f;
-    float pvz = 0.0f;   
-        
+    float pvz = 0.0f;
+
     //  Posición de los objetos
     float pox = 0.0f;
     float poy = 0.0f;
-    float poz = 0.0f;    
-    
+    float poz = 0.0f;
+
     int objSel = 0;
     private Object3d obj3;
-    
-    
+
     public MyCanvas(String fileName) {
         setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
         this.addGLEventListener(this);
@@ -97,7 +95,7 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
 
         gl.glEnable(GL2.GL_NORMALIZE);
 
-        ObjReader or = new ObjReader();        
+        ObjReader or = new ObjReader();
 
         // Cargar los objetos dentro del contexto de OpenGL
         try {
@@ -120,9 +118,8 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }       
-        */
-                
-        
+         */
+
     }
 
     @Override
@@ -142,10 +139,10 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(pox, poy, poz);        
+        gl.glTranslatef(pox, poy, poz);
         gl.glRotatef(rotate, 0.0f, 1.0f, 0.0f);
         gl.glScalef(scale, scale, scale);
-        
+
         /*
         // ----- Your OpenGL rendering code here (Render a white triangle for testing) -----
         float material[] = {0.0f, 1.0f, 0.0f, 1.0f};
@@ -158,21 +155,19 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
         
         gl.glEnable(GL2.GL_COLOR_MATERIAL);        
         
-        */
-        
+         */
         if (obj1 != null) {
             obj1.draw(gl);
         }
-                    
+
         if (obj2 != null) {
             obj2.draw(gl);
         }
-                
+
         if (obj3 != null) {
             obj3.draw(gl);
         }
-        
-        
+
         gl.glFlush();
 
         //rotate += 1.5;
@@ -263,14 +258,13 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
         // Enable lighting in GL.
         gl.glEnable(GL2.GL_LIGHT0);
         gl.glEnable(GL2.GL_LIGHTING);
-        
+
         /*
         gl.glTranslatef(plx, ply, plz);
         glut.glutSolidSphere(1.0f, 50, 50);
                 
         gl.glLoadIdentity();
-        */
-
+         */
     }
 
     @Override
@@ -282,13 +276,12 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
     public void keyPressed(KeyEvent e) {
 
         int cod = e.getExtendedKeyCode();
-     
-        if(cod>=KeyEvent.VK_0 && cod<=KeyEvent.VK_9){
-            objSel=cod-KeyEvent.VK_0;
-            System.out.println("Objeto seleccionado: # "+objSel);
+
+        if (cod >= KeyEvent.VK_0 && cod <= KeyEvent.VK_9) {
+            objSel = cod - KeyEvent.VK_0;
+            System.out.println("Objeto seleccionado: # " + objSel);
         }
-                    
-        
+
         if (e.isShiftDown()) {  // SHIFT y Flechas controlan la LUZ
             switch (cod) {
                 case KeyEvent.VK_R:
@@ -297,8 +290,8 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
                     ply = 0.0f;
                     plz = 0.0f;
                     break;
-                
-                case KeyEvent.VK_LEFT :  // Izquierda
+
+                case KeyEvent.VK_LEFT:  // Izquierda
                     plx -= 1;
                     break;
 
@@ -322,20 +315,20 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
                     break;
 
             }
-            System.out.println("Posicion de la luz, plx=" + plx + ", ply=" + ply + ", plz=" + plz);            
-            
-        } else if(e.isAltDown())  {  // ALT y Flechas controlan  posicion de la cámara
-            
+            System.out.println("Posicion de la luz, plx=" + plx + ", ply=" + ply + ", plz=" + plz);
+
+        } else if (e.isAltDown()) {  // ALT y Flechas controlan  posicion de la cámara
+
             switch (cod) {
-                
-                case KeyEvent.VK_R :  // Izquierda
-                                    //  Posición de la cámara
+
+                case KeyEvent.VK_R:  // Izquierda
+                    //  Posición de la cámara
                     pcx = 0.0f;
                     pcy = 2.0f;
-                    pcz = 10.0f;    
+                    pcz = 10.0f;
                     break;
-                    
-                case KeyEvent.VK_LEFT :  // Izquierda
+
+                case KeyEvent.VK_LEFT:  // Izquierda
                     pcx -= 1;
                     break;
 
@@ -358,22 +351,22 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
                     pcz += 1;
                     break;
 
-            }            
-        
+            }
+
             System.out.println("Posicion de la cámara, pcx=" + pcx + ", pcy=" + pcy + ", pcz=" + pcz);
-            
-        } else if(e.isControlDown())  {  // CTRL y Flechas controlan la dirección de vista de la cámara
-            
+
+        } else if (e.isControlDown()) {  // CTRL y Flechas controlan la dirección de vista de la cámara
+
             switch (cod) {
-                
-                case KeyEvent.VK_R :  // Izquierda
-                                    //  Posición de la cámara
+
+                case KeyEvent.VK_R:  // Izquierda
+                    //  Posición de la cámara
                     pvx = 0.0f;
                     pvy = 0.0f;
-                    pvz = 0.0f;    
+                    pvz = 0.0f;
                     break;
-                    
-                case KeyEvent.VK_LEFT :  // Izquierda
+
+                case KeyEvent.VK_LEFT:  // Izquierda
                     pvx -= 1;
                     break;
 
@@ -395,22 +388,21 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
                 case KeyEvent.VK_ADD:  // Zoom out
                     pvz += 1;
                     break;
-            }            
-        
+            }
+
             System.out.println("Posicion de la vista de la cámara, pvx=" + pvx + ", pvy=" + pvy + ", pvz=" + pvz);
 
-
         } else {
-            
+
             switch (cod) {
-                case KeyEvent.VK_R :  // Izquierda
-                                    //  Posición de la cámara
+                case KeyEvent.VK_R:  // Izquierda
+                    //  Posición de la cámara
                     pox = 0.0f;
                     poy = 0.0f;
-                    poz = 0.0f;    
+                    poz = 0.0f;
                     break;
-            
-                case KeyEvent.VK_LEFT :  // Izquierda
+
+                case KeyEvent.VK_LEFT:  // Izquierda
                     pox -= 1;
                     break;
 
@@ -437,14 +429,11 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
                     break;
                 case KeyEvent.VK_Z:  // Zoom out
                     rotate -= 1;
-                    break;                    
-            }         
-            
-            
-            System.out.println("Posicion del objeto: "+rotate+", pox=" + pox + ", poy=" + poy + ", poz=" + poz);
-        }
+                    break;
+            }
 
-        
+            System.out.println("Posicion del objeto: " + rotate + ", pox=" + pox + ", poy=" + poy + ", poz=" + poz);
+        }
 
     }
 

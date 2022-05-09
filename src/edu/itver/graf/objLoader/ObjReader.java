@@ -46,8 +46,8 @@ public class ObjReader {
         String groupname = "";
         int ln = 0;
         int estado = 0;
-        
-        obj=null;
+
+        obj = null;
 
         this.filenameObj = filenameObj;
 
@@ -62,17 +62,17 @@ public class ObjReader {
             if (line.trim().startsWith("#") || line.trim().isEmpty()) {
                 continue;
             }
-            
-            if (estado == 0 && line.trim().toLowerCase().startsWith("v") ){
-                
+
+            if (estado == 0 && line.trim().toLowerCase().startsWith("v")) {
+
                 if (obj == null) { // Supone no cuenta con definición de materiales                           
                     obj = new Object3d("objeto");
-                } 
-                estado = 1;                                
+                }
+                estado = 1;
             }
 
             tokens = line.split(delims);
-                       
+
             try {
                 switch (tokens[0]) {
                     case "mtllib":
@@ -98,7 +98,7 @@ public class ObjReader {
                         break;
 
                     case "v":  // Vertices                           
-                        
+
                         obj.addVertice(tokens[1], tokens[2], tokens[3]);
                         break;
 
@@ -135,14 +135,14 @@ public class ObjReader {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Error en carga de archivo, linea: " + ln+", contenido: "+line);
+                System.out.println("Error en carga de archivo, linea: " + ln + ", contenido: " + line);
             }
         }
 
         br.close();
         fr.close();
-        System.out.println("# Lineas procesadas: "+ln);
-     
+        System.out.println("# Lineas procesadas: " + ln);
+
         return obj;
     }
 

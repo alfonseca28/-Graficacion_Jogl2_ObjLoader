@@ -84,11 +84,11 @@ public class Object3d {
     public void addLine(String sLine[], String material, String groupname) {
         lns.add(new Line(sLine, material, groupname, this));
     }
-    
+
     public void addPoint(String[] sPoint, String material, String groupname) {
         pts.add(new Point(sPoint, material, groupname, this));
-    }    
-    
+    }
+
     public void addVertTex(String x, String y) {
         vtxtr.add(new Vertice(Float.parseFloat(x), Float.parseFloat(y), 0.0f));
     }
@@ -152,44 +152,44 @@ public class Object3d {
         this.groupname = grpname;
     }
 
-    public void draw(GL2 gl) {        
-        
+    public void draw(GL2 gl) {
+
         Iterator itr = fcs.iterator();
         while (itr.hasNext()) {
             Face fc = (Face) itr.next();
-            if (fc.mtl != null){            
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, fc.mtl.ambient,0);
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, fc.mtl.diffuse,0);
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, fc.mtl.specular,0);
+            if (fc.mtl != null) {
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, fc.mtl.ambient, 0);
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, fc.mtl.diffuse, 0);
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, fc.mtl.specular, 0);
                 gl.glMaterialf(GL2.GL_FRONT_AND_BACK, GL2.GL_SHININESS, fc.mtl.shininess);
-                                             
-                if (fc.mtl.isTextureD){                    
+
+                if (fc.mtl.isTextureD) {
                     gl.glEnable(GL2.GL_TEXTURE_2D);
                     gl.glEnable(GL2.GL_BLEND);
                     gl.glBlendFunc(GL2.GL_ONE, GL2.GL_ONE_MINUS_SRC_ALPHA);
-                    
+
                     fc.mtl.txtrs.get(0).bind(gl);
-                    fc.mtl.txtrs.get(0).enable(gl);                    
-                }                
+                    fc.mtl.txtrs.get(0).enable(gl);
+                }
                 /*
                 System.out.println("Ambiente:" + fc.mtl.ambient[0] + "/" + fc.mtl.ambient[1] + "/" + fc.mtl.ambient[2]+ "/" + fc.mtl.ambient[3]);
                 System.out.println("Difusa:" + fc.mtl.diffuse[0] + "/" + fc.mtl.diffuse[1] + "/" + fc.mtl.diffuse[2]+ "/" + fc.mtl.diffuse[3]);
                 System.out.println("Specular:" + fc.mtl.specular[0] + "/" + fc.mtl.specular[1] + "/" + fc.mtl.specular[2]+ "/" + fc.mtl.specular[3]);
                 System.out.println("Shininess:" + fc.mtl.shininess);
-                */
+                 */
             }
-            
-            if (this.smooth_shading!= null && !this.smooth_shading.isEmpty())
-                gl.glShadeModel(GL2.GL_SMOOTH);            
-            
-            
+
+            if (this.smooth_shading != null && !this.smooth_shading.isEmpty()) {
+                gl.glShadeModel(GL2.GL_SMOOTH);
+            }
+
             Iterator itr2 = fc.corners.iterator();
-            
-            switch(fc.corners.size()) {
+
+            switch (fc.corners.size()) {
                 case 1:
                     gl.glBegin(GL2.GL_POINTS);
-                    break;                    
-                case 2:            
+                    break;
+                case 2:
                     gl.glBegin(GL2.GL_LINES);
                     break;
                 case 3:
@@ -197,57 +197,58 @@ public class Object3d {
                     break;
                 case 4:
                     gl.glBegin(GL2.GL_QUADS);
-                    break;                    
-            }        
+                    break;
+            }
 
             while (itr2.hasNext()) {
                 Corner cr = (Corner) itr2.next();
 
                 if (cr.norm != null) {
-                    gl.glNormal3fv(cr.norm.getVertex3fv());                    
+                    gl.glNormal3fv(cr.norm.getVertex3fv());
                 }
-    
+
                 if (cr.txtr != null) {
                     gl.glTexCoord3fv(cr.txtr.getVertex3fv());
-                }                
-                if (cr.vert!=null){
+                }
+                if (cr.vert != null) {
                     gl.glVertex3fv(cr.vert.getVertex3fv());
                 }
             }
             gl.glEnd();
-            
-            if (fc.mtl!=null && fc.mtl.isTextureD){                
+
+            if (fc.mtl != null && fc.mtl.isTextureD) {
                 fc.mtl.txtrs.get(0).disable(gl);
-            }                        
+            }
         }
 
         itr = lns.iterator();
         while (itr.hasNext()) {
             Line ln = (Line) itr.next();
-            
-            if (ln.mtl != null){
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, ln.mtl.ambient,0);
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, ln.mtl.diffuse,0);
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, ln.mtl.specular,0);
-                gl.glMaterialf(GL2.GL_FRONT_AND_BACK, GL2.GL_SHININESS, ln.mtl.shininess);                
+
+            if (ln.mtl != null) {
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, ln.mtl.ambient, 0);
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, ln.mtl.diffuse, 0);
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, ln.mtl.specular, 0);
+                gl.glMaterialf(GL2.GL_FRONT_AND_BACK, GL2.GL_SHININESS, ln.mtl.shininess);
                 /*
                 System.out.println("Ambiente:" + ln.mtl.ambient[0] + "/" + ln.mtl.ambient[1] + "/" + ln.mtl.ambient[2]+ "/" + ln.mtl.ambient[3]);
                 System.out.println("Difusa:" + ln.mtl.diffuse[0] + "/" + ln.mtl.diffuse[1] + "/" + ln.mtl.diffuse[2]+ "/" + ln.mtl.diffuse[3]);
                 System.out.println("Specular:" + ln.mtl.specular[0] + "/" + ln.mtl.specular[1] + "/" + ln.mtl.specular[2]+ "/" + ln.mtl.specular[3]);
                 System.out.println("Shininess:" + ln.mtl.shininess);
-                */
-                if (ln.mtl.isTextureD){                    
+                 */
+                if (ln.mtl.isTextureD) {
                     gl.glEnable(GL2.GL_TEXTURE_2D);
                     gl.glEnable(GL2.GL_BLEND);
                     gl.glBlendFunc(GL2.GL_ONE, GL2.GL_ONE_MINUS_SRC_ALPHA);
-                    
+
                     ln.mtl.txtrs.get(0).bind(gl);
-                    ln.mtl.txtrs.get(0).enable(gl);                        
-                }                
+                    ln.mtl.txtrs.get(0).enable(gl);
+                }
             }
-            
-            if (!this.smooth_shading.isEmpty())
-                gl.glShadeModel(GL2.GL_SMOOTH);                        
+
+            if (!this.smooth_shading.isEmpty()) {
+                gl.glShadeModel(GL2.GL_SMOOTH);
+            }
 
             gl.glBegin(GL2.GL_LINE);
             Iterator itr2 = ln.corners.iterator();
@@ -256,49 +257,50 @@ public class Object3d {
                 Corner cr = (Corner) itr2.next();
 
                 if (cr.norm != null) {
-                    gl.glNormal3fv(cr.norm.getVertex3fv());                    
+                    gl.glNormal3fv(cr.norm.getVertex3fv());
                 }
-    
+
                 if (cr.txtr != null) {
                     gl.glTexCoord3fv(cr.txtr.getVertex3fv());
                 }
-                
+
                 gl.glVertex3fv(cr.vert.getVertex3fv());
             }
             gl.glEnd();
 
-            if (ln.mtl!=null && ln.mtl.isTextureD){                
+            if (ln.mtl != null && ln.mtl.isTextureD) {
                 ln.mtl.txtrs.get(0).disable(gl);
-            }                        
+            }
         }
 
         itr = pts.iterator();
         while (itr.hasNext()) {
             Point pt = (Point) itr.next();
-            
-            if (pt.mtl != null){
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, pt.mtl.ambient,0);
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, pt.mtl.diffuse,0);
-                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, pt.mtl.specular,0);
-                gl.glMaterialf(GL2.GL_FRONT_AND_BACK, GL2.GL_SHININESS, pt.mtl.shininess);                
+
+            if (pt.mtl != null) {
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, pt.mtl.ambient, 0);
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, pt.mtl.diffuse, 0);
+                gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, pt.mtl.specular, 0);
+                gl.glMaterialf(GL2.GL_FRONT_AND_BACK, GL2.GL_SHININESS, pt.mtl.shininess);
                 /*
                 System.out.println("Ambiente:" + ln.mtl.ambient[0] + "/" + ln.mtl.ambient[1] + "/" + ln.mtl.ambient[2]+ "/" + ln.mtl.ambient[3]);
                 System.out.println("Difusa:" + ln.mtl.diffuse[0] + "/" + ln.mtl.diffuse[1] + "/" + ln.mtl.diffuse[2]+ "/" + ln.mtl.diffuse[3]);
                 System.out.println("Specular:" + ln.mtl.specular[0] + "/" + ln.mtl.specular[1] + "/" + ln.mtl.specular[2]+ "/" + ln.mtl.specular[3]);
                 System.out.println("Shininess:" + ln.mtl.shininess);
-                */
-                if (pt.mtl.isTextureD){                    
+                 */
+                if (pt.mtl.isTextureD) {
                     gl.glEnable(GL2.GL_TEXTURE_2D);
                     gl.glEnable(GL2.GL_BLEND);
                     gl.glBlendFunc(GL2.GL_ONE, GL2.GL_ONE_MINUS_SRC_ALPHA);
-                    
+
                     pt.mtl.txtrs.get(0).bind(gl);
-                    pt.mtl.txtrs.get(0).enable(gl);                    
-                }                
+                    pt.mtl.txtrs.get(0).enable(gl);
+                }
             }
-            
-            if (!this.smooth_shading.isEmpty())
-                gl.glShadeModel(GL2.GL_SMOOTH);                        
+
+            if (!this.smooth_shading.isEmpty()) {
+                gl.glShadeModel(GL2.GL_SMOOTH);
+            }
 
             gl.glBegin(GL2.GL_POINTS);
             Iterator itr2 = pt.corners.iterator();
@@ -307,21 +309,21 @@ public class Object3d {
                 Corner cr = (Corner) itr2.next();
 
                 if (cr.norm != null) {
-                    gl.glNormal3fv(cr.norm.getVertex3fv());                    
+                    gl.glNormal3fv(cr.norm.getVertex3fv());
                 }
-    
+
                 if (cr.txtr != null) {
                     gl.glTexCoord3fv(cr.txtr.getVertex3fv());
                 }
-                
+
                 gl.glVertex3fv(cr.vert.getVertex3fv());
             }
             gl.glEnd();
 
-            if (pt.mtl!=null && pt.mtl.isTextureD){
+            if (pt.mtl != null && pt.mtl.isTextureD) {
                 pt.mtl.txtrs.get(0).disable(gl);
-            }                        
-        }                
+            }
+        }
     }
 
     void printVectors() {
