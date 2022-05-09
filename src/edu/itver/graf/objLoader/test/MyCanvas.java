@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
- /*
-http://www.sweethome3d.com/freeModels.jsp
-http://www.turbosquid.com/Search/3D-Models/free/obj
- */
+
+// http://www.sweethome3d.com/freeModels.jsp
+// http://www.turbosquid.com/Search/3D-Models/free/obj
+
 package edu.itver.graf.objLoader.test;
 
 import com.jogamp.opengl.*;
@@ -119,7 +114,6 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
             System.out.println(ioe.getMessage());
         }       
          */
-
     }
 
     @Override
@@ -431,15 +425,12 @@ public class MyCanvas extends GLCanvas implements GLEventListener, KeyListener {
                     rotate -= 1;
                     break;
             }
-
             System.out.println("Posicion del objeto: " + rotate + ", pox=" + pox + ", poy=" + poy + ", poz=" + poz);
         }
-
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 
     }
-
 }
