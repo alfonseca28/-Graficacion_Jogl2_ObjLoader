@@ -1,7 +1,3 @@
-
-// http://www.sweethome3d.com/freeModels.jsp
-// http://www.turbosquid.com/Search/3D-Models/free/obj
-
 package edu.itver.graf.objLoader.test;
 
 import com.jogamp.opengl.*;

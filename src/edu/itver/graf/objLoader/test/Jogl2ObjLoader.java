@@ -1,4 +1,3 @@
-
 package edu.itver.graf.objLoader.test;
 
 import java.io.File;
