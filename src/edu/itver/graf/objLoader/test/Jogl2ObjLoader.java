@@ -24,7 +24,7 @@ public class Jogl2ObjLoader {
     public static void main(String[] args) {
 
         Jogl2ObjLoader ol = new Jogl2ObjLoader();
-        ol.test("./data/dosCubos.obj");
+        ol.test("./data/bulldog.obj");
 
     }
 
